@@ -35,3 +35,13 @@ python train.py --dataset cifar100 --net Swin --k 8 --m 10
 ```
  
 ## GAN with RLO
+We use the official PyTorch implementation of the StyleGAN2-ADA from https://github.com/NVlabs/stylegan2-ada-pytorch/ to demonstrate the results of using the rooted loss replacing the original cross-entropy loss.
+Clone the official StyleGAN2-ADA code using the below command.
+```
+https://github.com/NVlabs/stylegan2-ada-pytorch.git
+```
+Steps to implement our experiments.
+1. Please follow the instructions in their documentation to prepare the dataset.
+2. Make appropriate changes to the file 'loss.py' as given in our repository.
+3. Change the values of the variables 'kparam' and 'ls' as per requirement. Default settings: kparam=2 ; ls='rlo'
+4. Refer to the file 'commands.txt' to find example commands for respective tasks/experiments.
