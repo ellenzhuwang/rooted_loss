@@ -1,0 +1,16 @@
+# Command to train a network after setting appropriate values for variables in 'loss.py' (Default values: k=2 ; ls='rlo'). Change the values of kimg, gpus, snap as per requirements. (Refer to StyleGAN2-ADA Documentation)
+
+    python train.py --data ./train_dataset/train_dataset_FFHQ --outdir ./results/FFHQ --kimg=500 --gpus=2 --snap=10
+
+    ## The results are saved to the folder './results/FFHQ'
+
+
+# Command to obtain the projection of a target image onto the latent space using a specific trained network.
+## Example: Command to project a target image from FFHQ using the initial network obtained using training with RLO (k=2) with FFHQ dataset.
+
+    python projector.py --outdir=./out/FFHQ/RLR_initial-network --target=./target.png --network=./results/FFHQ/TrainedWithRLO_FFHQ/network-snapshot-000000.pkl --save-video=False
+
+# Command to generate image from the projected vector using the trained network.
+
+    python generate.py --outdir=./out/FFHQ/RLR_initial-network --projected-w=./out/FFHQ/RLR_initial-network/projected_w.npz --network=./results/FFHQ/TrainedWithRLO_FFHQ/network-snapshot-000000.pkl
+
