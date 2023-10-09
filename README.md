@@ -47,5 +47,3 @@ Steps to implement our experiments.
 2. Make appropriate changes to the file 'loss.py' as given in our repository.
 3. Change the values of the variables 'kparam' and 'ls' as per requirement. Default settings: kparam=2 ; ls='rlo'
 4. Refer to the file 'commands.txt' to find example commands for respective tasks/experiments.
-
-Note: The './results' folder contains only the initial and final networks obtained during the training.
