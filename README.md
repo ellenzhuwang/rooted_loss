@@ -1,4 +1,4 @@
-# Accelerated Neural Network Training with Rooted Logistic Objectives :rocket:
+# Accelerated Neural Network Training with Rooted Logistic Objectives :rocket: [[arxiv]](https://arxiv.org/abs/2310.03890)
 
 
 Many neural networks deployed in the real world scenarios are trained using cross entropy based loss functions. From the optimization perspective, it is known that the behavior of first order methods such as gradient descent crucially depend on the separability of datasets. In fact, even in the most simplest case of binary classification, the rate of convergence depends on two factors: 1. condition number of data matrix, and 2. separability of the dataset. With no further pre-processing techniques such as over-parametrization, data augmentation etc., separability is an intrinsic quantity of the data distribution under consideration. We focus on the landscape design of the logistic function and derive a novel sequence of strictly convex functions that are at least as strict as logistic loss. The minimizers of these functions coincide with those of the minimum norm solution wherever possible. The strict convexity of the derived function can be extended to finetune state-of-the-art models and applications. In empirical experimental analysis, we apply our proposed rooted logistic objective to multiple deep models, e.g., FCNs and transformers, on various of classification benchmarks. Our results illustrate that training with rooted loss function is **converged faster** and **gains performance improvements**. Furthermore, we illustrate applications of our novel rooted loss function in generative modeling based downstream applications, such as finetuning StyleGAN model with the rooted loss. 
@@ -36,7 +36,7 @@ python train.py
 python train.py --dataset cifar100 --net Swin --k 8 --m 10
 ```
  
-## GAN with RLO
+## GAN with RLO:
 We use the official PyTorch implementation of the StyleGAN2-ADA from https://github.com/NVlabs/stylegan2-ada-pytorch/ to demonstrate the results of using the rooted loss replacing the original cross-entropy loss.
 Clone the official StyleGAN2-ADA code using the below command.
 ```
@@ -47,3 +47,16 @@ Steps to implement our experiments.
 2. Make appropriate changes to the file 'loss.py' as given in our repository.
 3. Change the values of the variables 'kparam' and 'ls' as per requirement. Default settings: kparam=2 ; ls='rlo'
 4. Refer to the file 'commands.txt' to find example commands for respective tasks/experiments.
+
+## Citation:
+If you found this work useful, please consider to star and cite:
+
+```
+@article{wang2023accelerated,
+  title={Accelerated Neural Network Training with Rooted Logistic Objectives},
+  author={Wang, Zhu and Veluswami, Praveen Raj and Mishra, Harsh and Ravi, Sathya N},
+  journal={arXiv preprint arXiv:2310.03890},
+  year={2023}
+}
+```
+
