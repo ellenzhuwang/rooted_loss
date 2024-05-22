@@ -1,7 +1,7 @@
-# Accelerated Neural Network Training with Rooted Logistic Objectives :rocket: [[arxiv]](https://arxiv.org/abs/2310.03890)
+# Optimizing Neural Network Training and Quantization with Rooted Logistic Objectives :rocket:
 
+Many neural networks deployed in real-world scenarios are trained using cross-entropy based loss functions. From the optimization perspective, it is known that the behavior of first-order methods such as gradient descent crucially depends on the separability of datasets. We focus on the landscape design of the logistic function and derive a novel sequence of {\em strictly} convex functions that are at least as strict as logistic loss. The minimizers of these functions coincide with those of the minimum norm solution wherever possible. The strict convexity of the derived function can be extended to finetune state-of-the-art models and applications. In empirical experimental analysis, we apply our proposed rooted logistic objective to multiple deep models on various of classification benchmarks. Our results illustrate that training with rooted loss function converges faster and gains performance improvements. Furthermore, we explore the robustness of this rooted loss function to provide enhanced quantization operation for sequence prediction tasks in large language models. By integrating a better-conditioned loss landscape, we facilitate post-training quantization and finetuning with quantizer with our proposed loss, which ensures minimal performance degradation with reduced precision. Additional applications of our novel rooted loss function include generative modeling based downstream applications, such as finetuning the StyleGAN model with the rooted loss.
 
-Many neural networks deployed in the real world scenarios are trained using cross entropy based loss functions. From the optimization perspective, it is known that the behavior of first order methods such as gradient descent crucially depend on the separability of datasets. In fact, even in the most simplest case of binary classification, the rate of convergence depends on two factors: 1. condition number of data matrix, and 2. separability of the dataset. With no further pre-processing techniques such as over-parametrization, data augmentation etc., separability is an intrinsic quantity of the data distribution under consideration. We focus on the landscape design of the logistic function and derive a novel sequence of strictly convex functions that are at least as strict as logistic loss. The minimizers of these functions coincide with those of the minimum norm solution wherever possible. The strict convexity of the derived function can be extended to finetune state-of-the-art models and applications. In empirical experimental analysis, we apply our proposed rooted logistic objective to multiple deep models, e.g., FCNs and transformers, on various of classification benchmarks. Our results illustrate that training with rooted loss function is **converged faster** and **gains performance improvements**. Furthermore, we illustrate applications of our novel rooted loss function in generative modeling based downstream applications, such as finetuning StyleGAN model with the rooted loss. 
 ## Regression with RLO
 
 ## Deep neural networks with RLO
@@ -35,7 +35,18 @@ python train.py
 ```
 python train.py --dataset cifar100 --net Swin --k 8 --m 10
 ```
- 
+## LLMs Quantization with RLO:
+
+Finetune OPT with RLO:
+Default settings: dataest: wikitext2, model: facebook/opt_125m. epochs: 3, k:5, m:5
+```
+pyhon ft_opt.py
+```
+Quantization:
+```
+CUDA_VISIBLE_DEVICES=0 python opt.py model_name wikitext2 --wbits 2 --quant ldlqRG --incoh_processing --save save_path
+```
+
 ## GAN with RLO:
 We use the official PyTorch implementation of the StyleGAN2-ADA from https://github.com/NVlabs/stylegan2-ada-pytorch/ to demonstrate the results of using the rooted loss replacing the original cross-entropy loss.
 Clone the official StyleGAN2-ADA code using the below command.
@@ -48,15 +59,4 @@ Steps to implement our experiments.
 3. Change the values of the variables 'kparam' and 'ls' as per requirement. Default settings: kparam=2 ; ls='rlo'
 4. Refer to the file 'commands.txt' to find example commands for respective tasks/experiments.
 
-## Citation:
-If you found this work useful, please consider to star and cite:
-
-```
-@article{wang2023accelerated,
-  title={Accelerated Neural Network Training with Rooted Logistic Objectives},
-  author={Wang, Zhu and Veluswami, Praveen Raj and Mishra, Harsh and Ravi, Sathya N},
-  journal={arXiv preprint arXiv:2310.03890},
-  year={2023}
-}
-```
 
