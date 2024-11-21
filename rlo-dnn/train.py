@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
 Training various of neural networks with Rooted Logistic Objectives
-Written by Ellen Wang 
-
 '''
 
 from __future__ import print_function
