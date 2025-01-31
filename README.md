@@ -1,19 +1,38 @@
-# Optimizing Neural Network Training and Quantization with Rooted Logistic Objectives :rocket:
+# Optimizing Neural Network Training and Quantization with Rooted Logistic Objectives (AISTATS 2025) :rocket:
 
-Many neural networks deployed in real-world scenarios are trained using cross-entropy based loss functions. From the optimization perspective, it is known that the behavior of first-order methods such as gradient descent crucially depends on the separability of datasets. We focus on the landscape design of the logistic function and derive a novel sequence of {\em strictly} convex functions that are at least as strict as logistic loss. The minimizers of these functions coincide with those of the minimum norm solution wherever possible. The strict convexity of the derived function can be extended to finetune state-of-the-art models and applications. In empirical experimental analysis, we apply our proposed rooted logistic objective to multiple deep models on various of classification benchmarks. Our results illustrate that training with rooted loss function converges faster and gains performance improvements. Furthermore, we explore the robustness of this rooted loss function to provide enhanced quantization operation for sequence prediction tasks in large language models. By integrating a better-conditioned loss landscape, we facilitate post-training quantization and finetuning with quantizer with our proposed loss, which ensures minimal performance degradation with reduced precision. Additional applications of our novel rooted loss function include generative modeling based downstream applications, such as finetuning the StyleGAN model with the rooted loss.
+First-order methods are widely employed for training neural networks that are used in practical applications. For classification of input features, Cross-Entropy based loss functions are often preferred since they are differentiable everywhere. Recent optimization results show that the convergence properties of first-order methods such as gradient descent are intricately tied to the separability of datasets and the induced loss landscape. We introduce Rooted Logistic Objectives (RLO) to improve practical convergence behavior with benefits for downstream tasks. We show that our proposed loss satisfies strict convexity properties and has better condition number properties that will benefit practical implementations. To evaluate our proposed RLO, we compare its performance on various classification benchmarks. Our results illustrate that training procedure converges faster with RLO in many cases. Furthermore, on two downstream tasks viz., post-training quantization and finetuning on quantized space, we show that it is possible to ensure lower performance degradation while using reduced precision for sequence prediction tasks in large language models over state of the art methods.
 
-## Regression with RLO
+## 📜 Citation
+If you find this project useful, please give us a star and cite:
 
-## Deep neural networks with RLO
+```
+@inproceedings{wang2025optimizing,
+  title={Optimizing Neural Network Training and Quantization with Rooted Logistic Objectives},
+  author={Wang, Zhu and Veluswami, Praveen Raj and Mishra, Harsh and Ravi, Sathya N},
+  booktitle={The 28th International Conference on Artificial Intelligence and Statistics},
+  year={2025},
+  url={https://openreview.net/forum?id=g5ml9INmja}
+}
+```
+```
+@article{wang2023accelerated,
+  title={Accelerated Neural Network Training with Rooted Logistic Objectives},
+  author={Wang, Zhu and Veluswami, Praveen Raj and Mishra, Harsh and Ravi, Sathya N},
+  journal={arXiv preprint arXiv:2310.03890},
+  year={2023}
+}
+```
+## 🧠 Deep neural networks with RLO
 
 ### Datasets support:
 - [x] CIFAR-10
 - [x] CIFAR-100
 - [x] Tiny-ImageNet
 - [x] Food-101
+- [x] ImageNet1k
 
 More coming...
-### Models support:
+### Vision Models support:
 - [x] VGG
 - [x] ResNet (18, 34, 50, 101)
 - [x] ViT (small, base, large)
@@ -21,17 +40,23 @@ More coming...
 - [x] CaiT
 - [x] Swin (base)
 
+### LLM Models quantization support:
+- [x] OPT
+- [x] Llama2
+- [x] Llama3
+      
 More coming...
 ### Loss function support:
 - [x] cross entropy
 - [x] focal
-- [x] **root** :heart_eyes:
+- [x] **RLO** :heart_eyes:
 
-### Usage examples: 
+## How to use RLO in your NN training/quantization: 
 Default settings: dataset: cifar10, net: ViT, loss: root, epochs:200, k:3, m:3
 ```
 python train.py
 ```
+Other settings example:
 ```
 python train.py --dataset cifar100 --net Swin --k 8 --m 10
 ```
